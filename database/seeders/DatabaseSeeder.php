@@ -9,16 +9,14 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-    **/
+     */
     public function run(): void
     {
-        // \App\Models\User::factory(5)->create();
-        // \App\Models\Category::factory(10)->create();
+        // \App\Models\User::factory(10)->create();
         \App\Models\Book::factory(5)->create();
-        // \App\Models\Group::factory(10)->create();
-        // \App\Models\Comment::factory(10)->create();
-        // \App\Models\Member::factory(10)->create();
-        // \App\Models\Like::factory(10)->create();
-        // \App\Models\Favourite::factory(10)->create();
+        // \App\Models\User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }

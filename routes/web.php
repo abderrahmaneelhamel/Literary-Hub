@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -8,34 +9,35 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
-Auth::routes();
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', function () {return view('index');});
-Route::get('/404', function () {return view('404');});
-Route::get('/blog-detail', function () {return view('blog-detail');});
-Route::get('/blog', function () {return view('blog');});
-Route::get('/books-media-detail-v1', function () {return view('books-media-detail-v1');});
-Route::get('/books-media-detail-v2', function () {return view('books-media-detail-v2');});
-Route::get('/books-media-gird-view-v1', function () {return view('books-media-gird-view-v1');});
-Route::get('/books-media-gird-view-v2', function () {return view('books-media-gird-view-v2');});
-Route::get('/books-media-list-view', function () {return view('books-media-list-view');});
-Route::get('/cart', function () {return view('cart');});
-Route::get('/checkout', function () {return view('checkout');});
-Route::get('/contact', function () {return view('contact');});
-Route::get('/home-v2', function () {return view('home-v2');});
-Route::get('/home-v3', function () {return view('home-v3');});
-Route::get('/news-events-detail', function () {return view('news-events-detail');});
-Route::get('/news-events-list-view', function () {return view('news-events-list-view');});
-Route::get('/services', function () {return view('services');});
-Route::get('/signin', function () {return view('signin');});
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth', 'verified'])->name('home');
 
+Route::get('/about', function () {
+    return view('about');
+})->middleware(['auth', 'verified'])->name('about');
+
+Route::get('/galery', function () {
+    return view('galery');
+})->middleware(['auth', 'verified'])->name('galery');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
