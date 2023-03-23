@@ -106,7 +106,7 @@
                                 @endif
                             </td>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sequi quod repellat voluptates necessitatibus dignissimos ab qui officia. Placeat reiciendis voluptatum ut quidem perferendis nobis harum? Perferendis quam sed laboriosam similique!
                                 {{ $book->created_at->format('Y-m-d') }}
                             </td>        
                             <td class="px-6 py-4 text-right">

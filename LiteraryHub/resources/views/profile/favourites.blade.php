@@ -20,13 +20,15 @@
         <p class="max-w-2xl mb-6 font-bold text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Your favourite Books</p>
     </div>
     @if($books->count())
-        
+        <?php $pass2 = -1; ?>
         @foreach($books as $key => $book)
+        <?php $pass1 = -1; ?>
         @if (isset($book->favourites))
           @foreach($book->favourites as $key => $user)
           <?php 
               if($user->id == Auth::user()->id){
                 $pass = 1;
+                $pass2 = 0;
               }
           ?>
           @endforeach
@@ -181,14 +183,19 @@
       </div>
     </div>
     @else
-         <div class="flex justify-center items-center pt-20  mb-5">
-            <h1 class="text-lg text-gray-600">You don't have any Favourite Books</h1>
-         </div> 
-    @endif      
+    @if ($pass2 == -1)
+      <div class="flex justify-center items-center pt-20  mb-5">
+         <h1 class="text-lg text-gray-600">You don't have any Favourite Books</h1>
+      </div> 
+      <?php $pass2 = 0;?>
+    @endif
+    @endif    
+     
     @endif
     <?php 
       $pass = 0;
     ?>
+
     @endforeach        
     @endif
   </div>
